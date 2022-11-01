@@ -6,7 +6,7 @@ const DataSchema = mongoose.Schema({
         required: true
     },
     product_id: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     product_sku:{
@@ -23,6 +23,11 @@ const DataSchema = mongoose.Schema({
     },
     stock_quantity:{
         type: Number,
+        required: true
+    },
+    updated: {
+        type: Boolean,
+        default: false,
         required: true
     }
 },{timestamps: true})
