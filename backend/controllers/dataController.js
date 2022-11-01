@@ -40,8 +40,23 @@ const updateData = async (req, res)=>{
     }
 }
 
+const deleteData = async (req, res)=>{
+    try {
+        await Data.findByIdAndDelete(req.params.id);
+        res.status(201).json({
+            success: true
+        })
+    } catch (error) {
+        res.json({
+            success: false,
+            error: error.message
+        })
+    }
+}
+
 
 module.exports = {
     getData,
-    updateData
+    updateData,
+    deleteData
 }
