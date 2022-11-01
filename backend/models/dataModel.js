@@ -27,8 +27,7 @@ const DataSchema = mongoose.Schema({
     },
     updated: {
         type: Boolean,
-        default: false,
-        required: true
+        default: false
     }
 },{timestamps: true})
 

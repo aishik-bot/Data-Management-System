@@ -5,6 +5,11 @@ const app = express();
 const connectDb = require('./connectDb');
 const apiToDb = require('./fetchApiData');
 
+const dataRoutes = require('./routes/dataRoutes');
+
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 const port = process.env.PORT;
 const dbUrl = process.env.DATABASE_URL;
 
@@ -21,6 +26,8 @@ setInterval(()=>{
     apiToDb();
 },interval)
 
+
+app.use('/api/v1', dataRoutes);
 
 app.get('/',(req, res)=>{
     res.send('Freeflow Assignment');
