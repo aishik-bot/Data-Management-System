@@ -3,14 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../store/dataSlice';
 import Table from 'react-bootstrap/Table'
 import axios from 'axios';
+import Pagination from './Pagination';
 
 export default function ProductTable() {
     const dispatch = useDispatch();
     const stateData = useSelector(state=>state);
     console.log(stateData.data.count);
 
+    const [sNo, setSNo] = useState(1);
+
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordsPerPage] = useState(50);
+    const [recordsPerPage] = useState(20);
 
     const productData = stateData.data.data;
 
@@ -67,6 +70,11 @@ export default function ProductTable() {
                 </Table>
             </div>
         ):null}
+        <Pagination
+        nPages={nPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        />
     </div>
   )
 }

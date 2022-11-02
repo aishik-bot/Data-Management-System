@@ -34,3 +34,35 @@ tr {
 td button{
   margin: 2px
 }
+
+.pagination{
+  display: inline-block;
+}
+
+.page-item{
+  display: inline;
+  list-style: none;
+}
+
+.page-item.to{
+  padding: 5px
+}
+
+.page-item.active{
+  background-color: black;
+}
+
+.page-item.active a{
+  color: white
+}
+
+.page-item a{
+  text-decoration: none;
+  color: black;
+  padding: 5px
+}
+
+.page-item :hover{
+  background-color: grey;
+  color: white
+}
