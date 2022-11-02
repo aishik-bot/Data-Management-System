@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 
 const connectDb = require('./connectDb');
@@ -9,6 +11,8 @@ const dataRoutes = require('./routes/dataRoutes');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+app.use(cors());
 
 const port = process.env.PORT;
 const dbUrl = process.env.DATABASE_URL;
