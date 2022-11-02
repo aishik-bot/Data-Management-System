@@ -27,12 +27,12 @@ th, td{
   size: 30px
 }
 
-tr {
-  border-bottom: 1px solid grey;
-}
-
 td button{
   margin: 2px
+}
+
+input{
+  width:50%
 }
 
 .pagination{
@@ -42,6 +42,7 @@ td button{
 .page-item{
   display: inline;
   list-style: none;
+  padding: 5px
 }
 
 .page-item.to{
