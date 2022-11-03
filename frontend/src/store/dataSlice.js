@@ -3,15 +3,21 @@ import axios from 'axios';
 
 const initialState = {
     loading: false,
-    data: {},
+    data: {
+        success: false,
+        count: 0,
+        data: []
+    },
     error: ''
 }
 
-export const fetchData = createAsyncThunk('data/fetchData',()=>{
-    return axios.get('http://localhost:8000/api/v1/data')
-    .then(response=>{
-        return response.data
-    })
+export const fetchData = createAsyncThunk('data/fetchData',async ()=>{
+    try {
+        const response = await axios.get('http://localhost:8000/api/v1/data');
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 const dataSlice = createSlice({

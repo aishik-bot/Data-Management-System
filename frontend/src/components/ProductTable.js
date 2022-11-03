@@ -4,6 +4,7 @@ import { fetchData } from '../store/dataSlice';
 import Table from 'react-bootstrap/Table';
 import Products from './Products'
 import Pagination from './Pagination';
+import Loader from './Loader';
 
 export default function ProductTable() {
     const dispatch = useDispatch();
@@ -12,13 +13,18 @@ export default function ProductTable() {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(50);
-
+    
     const productData = stateData.data.data;
-
+    const hours = 1*60*60*1000;
     useEffect(()=>{
-        dispatch(fetchData());
-    },[])
+        //render component every hour as the api data changes
+        const interval = setInterval(()=>{
+            dispatch(fetchData());
+        },hours)
 
+        return ()=>clearInterval(interval);
+    },[])
+    
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentData = productData.slice(indexOfFirstRecord, indexOfLastRecord);
@@ -27,7 +33,7 @@ export default function ProductTable() {
     
   return (
     <div>
-        {stateData.loading? <div>Loading...</div>: null}
+        {stateData.loading? <Loader/>: null}
         {!stateData.loading && stateData.error? <div>Error: {stateData.error}</div>: null}
         {!stateData.loading && stateData.data.count? (
             <>
@@ -53,13 +59,14 @@ export default function ProductTable() {
                         </tbody>
                     </Table>
                 </div>
+                <div>
+                    <Pagination
+                    nPages={nPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}/>
+                </div>
             </>
         ):null}
-        <Pagination
-        nPages={nPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        />
     </div>
   )
 }
