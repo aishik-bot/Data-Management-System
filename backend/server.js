@@ -28,7 +28,7 @@ let count = 0;
 setInterval(()=>{
     console.log("Interval "+(++count));
     apiToDb();
-},5*60*1000)
+},interval)
 
 
 app.use('/api/v1', dataRoutes);
