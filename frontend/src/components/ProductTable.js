@@ -8,14 +8,28 @@ import Pagination from './Pagination';
 export default function ProductTable() {
     const dispatch = useDispatch();
     const stateData = useSelector(state=>state);
-    console.log(stateData.data.count);
+    //console.log(stateData.data.count);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(50);
     
     const productData = stateData.data.data;
+
+    const fetchDb = ()=>{
+        //console.log("Interval")
+        dispatch(fetchData())
+    }
+
+    const hours = 1;
+    const interval = hours*60*60*1000;
+
     useEffect(()=>{
         dispatch(fetchData());
+        const fetchInterval = setInterval(fetchDb,interval);
+
+        return ()=>{
+            clearInterval(fetchInterval);
+        }
     },[])
     
     const indexOfLastRecord = currentPage * recordsPerPage;
